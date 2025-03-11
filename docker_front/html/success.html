@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>로그인 성공</title>
+    <style>
+        .container { max-width: 600px; margin: 100px auto; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 로그인 성공!</h1>
+        <p id="welcomeMessage"></p>
+        <a href="login.html">로그아웃</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        document.getElementById('welcomeMessage').textContent = 
+            `${username}님, 환영합니다!`;
+    </script>
+</body>
+</html>

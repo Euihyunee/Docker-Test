@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>로그인</title>
+    <style>
+        .container { max-width: 400px; margin: 50px auto; }
+        input { margin: 10px 0; padding: 8px; width: 100%; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">로그인</button>
+        <p>계정이 없으신가요? <a href="signup.html">회원가입</a></p>
+    </div>
+    <script>
+        async function login() {
+            const user = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+            
+            const response = await fetch('http://localhost:8080/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            });
+            
+            if (response.status === 404) {
+                alert('존재하지 않는 아이디입니다');
+            } else if (response.status === 401) {
+                alert('비밀번호가 틀렸습니다');
+            } else if (response.ok) {
+                window.location.href = `success.html?username=${user.username}`;
+            }
+        }
+    </script>
+</body>
+</html>
